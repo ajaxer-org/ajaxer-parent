@@ -8,6 +8,7 @@
 
     <name>Ajaxer Parent</name>
     <description>Parent pom to manage all projects</description>
+    <url>https://github.com/ajaxer-org/ajaxer-parent</url>
 
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
@@ -41,7 +42,7 @@
 
     <profiles>
         <profile>
-            <id>maven-release</id>
+            <id>ci-cd</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -141,7 +142,7 @@
                             <localCheckout>true</localCheckout>
                             <pushChanges>false</pushChanges>
                             <mavenExecutorId>forked-path</mavenExecutorId>
-<!--                            <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>-->
+                            <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
                         </configuration>
                         <dependencies>
                             <dependency>
