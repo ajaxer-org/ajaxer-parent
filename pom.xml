@@ -7,7 +7,7 @@
     <artifactId>parent</artifactId>
     <version>0.0.2</version>
 
-    <name>Ajaxer Parent</name>
+    <name>parent</name>
     <description>Parent pom to manage all projects</description>
     <url>https://github.com/ajaxer-org/ajaxer-parent</url>
 
@@ -192,7 +192,6 @@
                 <role>developer</role>
             </roles>
         </developer>
-
     </developers>
 
     <scm>
