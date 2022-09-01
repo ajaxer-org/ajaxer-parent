@@ -5,7 +5,7 @@
 
     <groupId>org.ajaxer</groupId>
     <artifactId>parent</artifactId>
-    <version>0.0.0</version>
+    <version>0.0.1</version>
 
     <name>Ajaxer Parent</name>
     <description>Parent pom to manage all projects</description>
