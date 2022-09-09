@@ -130,7 +130,7 @@
             </build>
         </profile>
 
-        <!--Prelease-with-github-action-->
+        <!--release-with-github-action-->
         <profile>
             <id>release-with-github-action</id>
             <activation>
