@@ -1,0 +1,27 @@
+name: Maven Central Deployment
+
+on:
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java for publishing to Maven Central Repository
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+          server-id: ossrh-ajaxer-org
+          server-username: ${{ secrets.OSSRH_USERNAME }}
+          server-password: ${{ secrets.OSSRH_TOKEN }}
+          gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+          gpg-passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+      - name: build artifact
+        run: mvn clean package --no-transfer-progress
+      - name: Publish to the Maven Central Repository
+        run: |
+          mvn deploy -Prelease-with-github-action -Dmaven.test.skip=true \
+          --no-transfer-progress \
+          --batch-mode
