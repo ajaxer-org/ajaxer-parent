@@ -7,7 +7,7 @@
     <artifactId>parent</artifactId>
     <version>0.0.3</version>
 
-    <name>parent</name>
+    <name>Ajaxer Parent</name>
     <description>Parent pom to manage all projects</description>
     <url>https://github.com/ajaxer-org/ajaxer-parent</url>
 
@@ -38,12 +38,21 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <ossrh-id>ossrh-ajaxer-org</ossrh-id>
+
+        <!--version-->
+        <version.maven-gpg-plugin>3.0.1</version.maven-gpg-plugin>
+        <version.maven-source-plugin>3.2.1</version.maven-source-plugin>
+        <version.maven-javadoc-plugin>3.4.1</version.maven-javadoc-plugin>
+        <version.nexus-staging-maven-plugin>1.6.13</version.nexus-staging-maven-plugin>
     </properties>
 
 
     <profiles>
+        <!--release-manually-->
         <profile>
-            <id>ci-cd</id>
+            <id>release</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -51,9 +60,10 @@
                 <plugins>
                     <!--maven-gpg-plugin-->
                     <plugin>
+                        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>${version.maven-gpg-plugin}</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -61,34 +71,33 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <!--maven-deploy-plugin-->
-                    <plugin>
-                        <artifactId>maven-deploy-plugin</artifactId>
-                        <version>2.8.2</version>
-                        <executions>
-                            <execution>
-                                <id>default-deploy</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>deploy</goal>
-                                </goals>
+                                <!-- Prevent `gpg` from using pinentry programs,
+                                     only use for CICD i.e. GitHub action,
+                                     remove <gpgArguments> tag for manual deploy
+                                 -->
+                                <!--
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>&#45;&#45;pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                                -->
                             </execution>
                         </executions>
                     </plugin>
 
                     <!--maven-source-plugin-->
                     <plugin>
+                        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.2.0</version>
+                        <version>${version.maven-source-plugin}</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
                                 <goals>
+                                    <!--<goal>jar</goal>-->
                                     <goal>jar-no-fork</goal>
                                 </goals>
                             </execution>
@@ -97,9 +106,10 @@
 
                     <!--maven-javadoc-plugin-->
                     <plugin>
+                        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.2.0</version>
+                        <version>${version.maven-javadoc-plugin}</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -114,44 +124,19 @@
                         </executions>
                     </plugin>
 
-                    <!--maven-surefire-plugin-->
+                    <!-- nexus-staging-maven-plugin -->
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.0</version>
-                    </plugin>
-
-                    <!--nexus-staging-maven-plugin-->
-                    <plugin>
+                        <!-- https://mvnrepository.com/artifact/org.sonatype.plugins/nexus-staging-maven-plugin -->
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.7</version>
+                        <version>${version.nexus-staging-maven-plugin}</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <serverId>ossrh-ajaxer-org</serverId>
-                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <serverId>${ossrh-id}</serverId>
+                            <!-- below url will be provided by sonatype in you JIRA issue -->
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
-                    </plugin>
-
-                    <!--maven-release-plugin-->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-release-plugin</artifactId>
-                        <version>2.5.3</version>
-                        <configuration>
-                            <localCheckout>true</localCheckout>
-                            <pushChanges>false</pushChanges>
-                            <mavenExecutorId>forked-path</mavenExecutorId>
-                            <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
-                        </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.apache.maven.scm</groupId>
-                                <artifactId>maven-scm-provider-gitexe</artifactId>
-                                <version>1.9.5</version>
-                            </dependency>
-                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
@@ -172,11 +157,11 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>ossrh-ajaxer-org</id>
+            <id>${ossrh-id}</id>
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>ossrh-ajaxer-org</id>
+            <id>${ossrh-id}</id>
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
