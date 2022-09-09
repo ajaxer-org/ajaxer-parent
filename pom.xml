@@ -71,18 +71,96 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!--maven-source-plugin-->
+                    <plugin>
+                        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>${version.maven-source-plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <!--<goal>jar</goal>-->
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!--maven-javadoc-plugin-->
+                    <plugin>
+                        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${version.maven-javadoc-plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- add this to disable checking -->
+                                    <doclint>none</doclint>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- nexus-staging-maven-plugin -->
+                    <plugin>
+                        <!-- https://mvnrepository.com/artifact/org.sonatype.plugins/nexus-staging-maven-plugin -->
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>${version.nexus-staging-maven-plugin}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>${ossrh-id}</serverId>
+                            <!-- below url will be provided by sonatype in you JIRA issue -->
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--Prelease-with-github-action-->
+        <profile>
+            <id>release-with-github-action</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <!--maven-gpg-plugin-->
+                    <plugin>
+                        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${version.maven-gpg-plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
                                 <!-- Prevent `gpg` from using pinentry programs,
                                      only use for CICD i.e. GitHub action,
                                      remove <gpgArguments> tag for manual deploy
                                  -->
-                                <!--
                                 <configuration>
                                     <gpgArguments>
-                                        <arg>&#45;&#45;pinentry-mode</arg>
+                                        <arg>--pinentry-mode</arg>
                                         <arg>loopback</arg>
                                     </gpgArguments>
                                 </configuration>
-                                -->
                             </execution>
                         </executions>
                     </plugin>
