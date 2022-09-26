@@ -10,9 +10,9 @@
 ---
 
 ```
-<dependency>
+<parent>
     <groupId>${project.groupId}</groupId>
     <artifactId>${project.artifactId}</artifactId>
     <version>${project.version}</version>
-</dependency>
+</parent>
 ```
