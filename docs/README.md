@@ -11,8 +11,8 @@
 
 ```
 <dependency>
-    <groupId>org.ajaxer</groupId>
-    <artifactId>parent</artifactId>
-    <version>0.0.4</version>
+    <groupId>${project.groupId}</groupId>
+    <artifactId>${project.artifactId}</artifactId>
+    <version>${project.version}</version>
 </dependency>
 ```

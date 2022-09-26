@@ -1,8 +1,9 @@
-name: Maven Central Deployment
+name: Maven Central Deployment On Tag PUSH
 
 on:
-  pull_request:
-    branches: [ "master" ]
+  push:
+    tags:
+      - '*'
 
 jobs:
   publish:
@@ -21,11 +22,15 @@ jobs:
       - name: build artifact
         run: mvn clean package --no-transfer-progress
       - name: Publish to the Maven Central Repository
-        run: |
-          mvn deploy -Prelease-with-github-action -Dmaven.test.skip=true \
-          --no-transfer-progress \
-          --batch-mode
+        run: mvn deploy -P release -Dmaven.test.skip=true --no-transfer-progress
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: "${{ github.workspace }}/target/*.jar"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          bodyFile: "release-notes.md"
