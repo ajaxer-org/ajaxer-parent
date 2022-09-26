@@ -18,7 +18,7 @@
 
     <groupId>org.ajaxer</groupId>
     <artifactId>parent</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.5</version>
 
     <name>Ajaxer Parent</name>
     <description>Parent pom to manage all projects</description>
@@ -270,7 +270,7 @@
         <connection>scm:git:https://github.com/ajaxer-org/ajaxer-parent.git</connection>
         <developerConnection>scm:git:https://github.com/ajaxer-org/ajaxer-parent.git</developerConnection>
         <url>https://github.com/ajaxer-org/ajaxer-parent</url>
-        <tag>HEAD</tag>
+        <tag>v0.0.5</tag>
     </scm>
 
 </project>
