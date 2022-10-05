@@ -18,7 +18,7 @@
 
     <groupId>org.ajaxer</groupId>
     <artifactId>parent</artifactId>
-    <version>0.0.6-SNAPSHOT</version>
+    <version>0.0.6</version>
 
     <name>Ajaxer Parent</name>
     <description>Parent pom to manage all projects</description>
@@ -188,6 +188,12 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--maven-release-plugin-->
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-release-plugin -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
@@ -196,13 +202,6 @@
             <id>release</id>
             <build>
                 <plugins>
-                    <!--maven-release-plugin-->
-                    <plugin>
-                        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-release-plugin -->
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-release-plugin</artifactId>
-                    </plugin>
-
                     <!--maven-gpg-plugin-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
