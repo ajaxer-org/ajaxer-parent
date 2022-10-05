@@ -10,9 +10,9 @@
 ---
 
 ```
-<dependency>
+<parent>
     <groupId>org.ajaxer</groupId>
     <artifactId>parent</artifactId>
-    <version>0.0.5</version>
-</dependency>
+    <version>0.0.6</version>
+</parent>
 ```
