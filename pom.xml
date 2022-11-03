@@ -18,7 +18,7 @@
 
     <groupId>org.ajaxer</groupId>
     <artifactId>parent</artifactId>
-    <version>0.0.9-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
 
     <name>Ajaxer Parent</name>
     <description>Parent pom to manage all projects</description>
@@ -226,6 +226,18 @@
                         <artifactId>nexus-staging-maven-plugin</artifactId>
                     </plugin>
 
+                    <!--maven-resources-plugin-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>resource</id>
+            <build>
+                <plugins>
                     <!--maven-resources-plugin-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
