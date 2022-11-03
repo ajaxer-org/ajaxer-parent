@@ -13,6 +13,6 @@
 <parent>
     <groupId>org.ajaxer</groupId>
     <artifactId>parent</artifactId>
-    <version>0.0.8</version>
+    <version>0.0.9</version>
 </parent>
 ```
