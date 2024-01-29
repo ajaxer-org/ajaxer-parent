@@ -236,7 +236,7 @@
             </build>
         </profile>
         <profile>
-            <id>resource</id>
+            <id>resource-readme-update</id>
             <build>
                 <plugins>
                     <!--maven-resources-plugin-->
