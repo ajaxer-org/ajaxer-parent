@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (C) 2022 ajaxer.org
+  ~ Copyright (c) 2024 ajaxer.org
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
   ~ You may obtain a copy of the License at
   ~
-  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~    http://www.apache.org/licenses/LICENSE-2.0
   ~
   ~ Unless required by applicable law or agreed to in writing, software
   ~ distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,8 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <groupId>org.ajaxer</groupId>
     <artifactId>parent</artifactId>
@@ -65,7 +66,7 @@
                     <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-release-plugin -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>3.0.0-M6</version>
+                    <version>3.0.1</version>
                     <configuration>
                         <!--<tagNameFormat>${project.artifactId}-v${project.version}</tagNameFormat>-->
                         <tagNameFormat>v@{project.version}</tagNameFormat>
@@ -80,7 +81,7 @@
                     <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.2</version>
+                    <version>3.3.0</version>
                     <configuration>
                         <archive>
                             <manifest>
@@ -96,7 +97,7 @@
                     <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.1.0</version>
                     <executions>
                         <execution>
                             <id>sign-artifacts</id>
@@ -113,7 +114,7 @@
                     <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                     <executions>
                         <execution>
                             <id>attach-sources</id>
@@ -129,7 +130,7 @@
                     <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.6.3</version>
                     <executions>
                         <execution>
                             <id>attach-javadocs</id>
@@ -149,7 +150,7 @@
                     <!-- https://mvnrepository.com/artifact/org.sonatype.plugins/nexus-staging-maven-plugin -->
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>1.6.7</version>
+                    <version>1.6.13</version>
                     <extensions>true</extensions>
                     <configuration>
                         <serverId>${id-ossrh}</serverId>
@@ -164,7 +165,7 @@
                     <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.3.1</version>
                     <executions>
                         <execution>
                             <id>copy-resources</id>
@@ -289,5 +290,4 @@
         <url>https://github.com/ajaxer-org/ajaxer-parent</url>
         <tag>HEAD</tag>
     </scm>
-
 </project>
