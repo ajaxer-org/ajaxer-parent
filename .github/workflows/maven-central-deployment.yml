@@ -16,7 +16,6 @@ jobs:
         uses: actions/checkout@v3
 
         # DO NOT USE CONTAINER, else gpg sign step will fail
-
       - name: Set up Java 1.8
         uses: actions/setup-java@v1
         with:
